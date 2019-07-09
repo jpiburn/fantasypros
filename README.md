@@ -50,28 +50,22 @@ fp_snaps(season = 2018)
 #> # ... with 495 more rows, and 12 more variables: w8 <dbl>, w9 <dbl>,
 #> #   w10 <dbl>, w11 <dbl>, w12 <dbl>, w13 <dbl>, w14 <dbl>, w15 <dbl>,
 #> #   w16 <dbl>, w17 <dbl>, ttl <dbl>, avg <dbl>
+
+fp_snaps(pos = "defense", season = 2018, percentage = TRUE)
+#> # A tibble: 769 x 23
+#>    player pos   team  season    w1    w2    w3    w4    w5    w6    w7
+#>    <chr>  <chr> <chr>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1 Patri~ CB    ARI     2018    99   100    99    98    97   100    98
+#>  2 Adria~ DE    ATL     2018    30    30    42    37    51    33    40
+#>  3 Princ~ CB    CHI     2018    98   100    50     0    NA    67    98
+#>  4 Marce~ DT    JAC     2018    65    75    68    57    66    60    53
+#>  5 Camer~ DE    PIT     2018    85    86    73    74    71    80    NA
+#>  6 Von M~ LB    DEN     2018    88    77    68    68    74    70    85
+#>  7 Rober~ DE    DAL     2018    59    51    71    56    68    71    58
+#>  8 J.J. ~ DE    HOU     2018    93   100    84    87    90    87    90
+#>  9 Justi~ DE    IND     2018    77    85    94    97    27     0     0
+#> 10 Ryan ~ LB    WAS     2018    68    82    83    NA    73    80    74
+#> # ... with 759 more rows, and 12 more variables: w8 <dbl>, w9 <dbl>,
+#> #   w10 <dbl>, w11 <dbl>, w12 <dbl>, w13 <dbl>, w14 <dbl>, w15 <dbl>,
+#> #   w16 <dbl>, w17 <dbl>, ttl <dbl>, avg <dbl>
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
