@@ -55,7 +55,7 @@ fp_targets <- function(pos = "offense", season) {
 
   fp_url <- paste0(
     "https://www.fantasypros.com/nfl/reports/targets/",
-    pos_url, "?", season_url, "&", perc_url
+    pos_url, "?", season_url
   )
 
   fp_html <- xml2::read_html(fp_url)

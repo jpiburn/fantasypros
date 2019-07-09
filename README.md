@@ -68,4 +68,23 @@ fp_snaps(pos = "defense", season = 2018, percentage = TRUE)
 #> # ... with 759 more rows, and 12 more variables: w8 <dbl>, w9 <dbl>,
 #> #   w10 <dbl>, w11 <dbl>, w12 <dbl>, w13 <dbl>, w14 <dbl>, w15 <dbl>,
 #> #   w16 <dbl>, w17 <dbl>, ttl <dbl>, avg <dbl>
+
+# total targets for TE's in the 2014 season
+fp_targets(pos = "TE", season = 2014)
+#> # A tibble: 134 x 22
+#>    player team  season    w1    w2    w3    w4    w5    w6    w7    w8
+#>    <chr>  <chr>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1 Zach ~ SEA     2014     4     1     2    NA    NA    NA    NA    NA
+#>  2 Luke ~ SEA     2014     1     0     0    NA     4     6     0     4
+#>  3 Andre~ GB      2014     4     2     5     0     2     5     1     3
+#>  4 Ryan ~ CLE     2014     0     0     0     0     0     0     0     0
+#>  5 Richa~ GB      2014     0     1     0     2     1     0     2     5
+#>  6 Antho~ KC      2014     6     4     2     1     7    NA     1     4
+#>  7 Travi~ KC      2014     5     6     4     9     3    NA     4     6
+#>  8 Taylo~ TEN     2014     2     1     1     0     0     0     0     0
+#>  9 Delan~ TEN     2014     4    14     7     7     4     8     5     9
+#> 10 Beau ~ TEN     2014     0     0     0     0     0     0     0     0
+#> # ... with 124 more rows, and 11 more variables: w9 <dbl>, w10 <dbl>,
+#> #   w11 <dbl>, w12 <dbl>, w13 <dbl>, w14 <dbl>, w15 <dbl>, w16 <dbl>,
+#> #   w17 <dbl>, ttl <dbl>, avg <dbl>
 ```

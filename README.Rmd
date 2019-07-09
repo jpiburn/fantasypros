@@ -44,5 +44,8 @@ library(fantasypros)
 fp_snaps(season = 2018)
 
 fp_snaps(pos = "defense", season = 2018, percentage = TRUE)
+
+# total targets for TE's in the 2014 season
+fp_targets(pos = "TE", season = 2014)
 ```
 
