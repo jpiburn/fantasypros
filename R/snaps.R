@@ -20,8 +20,11 @@
 #' @return a tibble
 #' @export
 #'
-#' @note Due to how fantasypros returns the data, all player's teams are listed under their
+#' @note \itemize{
+#'        \item Due to how fantasypros returns the data, all player's teams are listed under their
 #'       current team regardless of what season you query.
+#'       \item Bye weeks are represented as \code{NA}
+#'        }
 #'
 #' @examples
 #'

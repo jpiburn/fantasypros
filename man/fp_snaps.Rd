@@ -33,8 +33,11 @@ a tibble
 NFL Snap Counts by Week
 }
 \note{
-Due to how fantasypros returns the data, all player's teams are listed under their
+\itemize{
+       \item Due to how fantasypros returns the data, all player's teams are listed under their
       current team regardless of what season you query.
+      \item Bye weeks are represented as \code{NA}
+       }
 }
 \examples{
 

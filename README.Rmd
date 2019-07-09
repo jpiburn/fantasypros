@@ -24,6 +24,7 @@ The goal of fantasypros is to ...
 You can install the released version of fantasypros from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+# not on CRAN
 install.packages("fantasypros")
 ```
 
@@ -37,9 +38,10 @@ devtools::install_github("jpiburn/fantasypros")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
+```{r example, message=FALSE}
 library(fantasypros)
-## basic example code
+
+fp_snaps(season = 2018)
 ```
 
 What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
