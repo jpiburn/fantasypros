@@ -38,56 +38,29 @@
 #' fp_snap_counts(pos = "defense")
 fp_snap_counts <- function(pos = "offense", season, percentage = FALSE) {
 
-  if (missing(pos)) pos <- "offense"
-  else pos <- tolower(pos)
-
-  if (percentage) perc_url <- "show=perc"
-  else perc_url <- "show=count"
-
   if (missing(season)) season <- as.numeric(format(Sys.Date(), "%Y"))
+  if (percentage) show <- "perc"
+  else show <- "count"
 
-  season_url <- paste0("year=", season)
+  fp_query_list <- fp_build_query_list(season = season,
+                                       show   = show
+                                       )
 
-  pos_url <- switch(pos,
-                    "offense" = "",
-                    "off"     = "",
-                    "qb"      = "qb.php",
-                    "rb"      = "rb.php",
-                    "wr"      = "wr.php",
-                    "te"      = "te.php",
-                    "def"     = "defense.php",
-                    "defense" = "defense.php",
-                    "dl"      = "dl.php",
-                    "lb"      = "lb.php",
-                    "db"      = "db.php")
+  pos_path <- fp_format_pos_path(pos)
 
-  if (is.null(pos_url)) {
-    warning(
-      paste("position", pos, "not recognized. Defaulting to offense only."),
-      call. = FALSE
-    )
-    pos_url <- ""
-  }
-
-  fp_url <- paste0(
-    "https://www.fantasypros.com/nfl/reports/snap-counts/",
-    pos_url, "?", season_url, "&", perc_url
+  fp_url <- fp_build_url(
+    path_list = list("nfl", "reports", "snap-counts", pos_path)
   )
 
-  fp_html <- xml2::read_html(fp_url)
-  fpdf <- rvest::html_table(fp_html)[[1]]
+  fp_url$query <- fp_query_list
+  fp_url_string <- httr::build_url(fp_url)
+  fpdf <- fp_get_data(fp_url_string)
+  fpdf <- tibble::add_column(fpdf,
+                             season = season,
+                             .after = "team"
+                             )
 
-  num_cols <- setdiff(names(fpdf), c("Player", "Pos", "Team"))
-  fpdf[num_cols][] <- lapply(fpdf[num_cols], function(x) gsub("bye|-", NA, x))
-  fpdf[num_cols][] <- lapply(fpdf[num_cols], readr::parse_number)
-
-  fpdf <- tibble::add_column(fpdf, "season" = season, .after = "Team")
-
-  clean_names <- janitor::make_clean_names(names(fpdf))
-  clean_names <- gsub(pattern = "x", replacement = "w", clean_names)
-  names(fpdf) <- clean_names
-
-  tibble::as_tibble(fpdf)
+  fpdf
 }
 
 #' Detailed Analysis of NFL snap counts
@@ -108,9 +81,8 @@ fp_snap_counts <- function(pos = "offense", season, percentage = FALSE) {
 #' @param season \code{Numeric}. The NFL season. If missing it will return the current year's season.
 #'               Supported season only go back to \code{2016}
 #' @param start_week \code{Numeric}. The starting week. Default is \code{1}
+#' @param format
 #' @param end_week \code{Numeric}. The ending week. Default is \code{17}
-#' @param format \code{Charcater}. Scoring format. \code{"half"}, \code{"ppr"}, \code{"std"}.
-#'               The default is \code{"half"}
 #'
 #' @return a tibble
 #' @export
@@ -125,74 +97,39 @@ fp_snap_counts <- function(pos = "offense", season, percentage = FALSE) {
 #' fp_snap_analysis(season = 2018, start_week = 5, end_week = 9)
 #'
 #' # TE's in the 2017 season using standard scoring
-#' fp_snap_analysis(pos = "TE", season = 2017, format = "std")
+#' fp_snap_analysis(pos = "TE", season = 2017, scoring = "std")
 #'
 #' # all defensive positions for the current NFL season in week 1
 #' fp_snap_analysis(pos = "defense", start_week = 1, end_week = start_week)
 fp_snap_analysis <- function(pos = "offense", season, start_week = 1, end_week = 17,
-                             format = c("half", "ppr", "std")) {
+                             scoring = c("half", "ppr", "std")) {
 
-  format <- match.arg(format)
-
-  if (missing(pos)) pos <- "offense"
-  else pos <- tolower(pos)
-
+  scoring <- match.arg(scoring)
   if (missing(season)) season <- as.numeric(format(Sys.Date(), "%Y"))
-  season_url <- paste0("year=", season)
 
-  format_url <- paste0("scoring=", toupper(format))
+  fp_query_list <- fp_build_query_list(season = season,
+                                       scoring = scoring,
+                                       start_week = start_week,
+                                       end_week = end_week,
+                                       snaps = 0
+                                       )
 
-  week_url <- paste0("start=", start_week, "&", "end=", end_week)
+  pos_path <- fp_format_pos_path(pos)
 
-  snaps_url <- "snaps=0"
-
-  pos_url <- switch(pos,
-                    "offense" = "",
-                    "off"     = "",
-                    "qb"      = "qb.php",
-                    "rb"      = "rb.php",
-                    "wr"      = "wr.php",
-                    "te"      = "te.php",
-                    "def"     = "defense.php",
-                    "defense" = "defense.php",
-                    "dl"      = "dl.php",
-                    "lb"      = "lb.php",
-                    "db"      = "db.php")
-
-  if (is.null(pos_url)) {
-    warning(
-      paste("position", pos, "not recognized. Defaulting to offense only."),
-      call. = FALSE
+  fp_url <- fp_build_url(
+    path_list = list("nfl", "reports", "snap-count-analysis", pos_path)
     )
-    pos_url <- ""
-  }
 
-  query_url <- paste(season_url, week_url, snaps_url, format_url, sep = "&")
-
-
-
-  fp_url <- paste0(
-    "https://www.fantasypros.com/nfl/reports/snap-count-analysis/",
-    pos_url, "?", query_url
-  )
-
-  fp_html <- xml2::read_html(fp_url)
-  fpdf <- rvest::html_table(fp_html)[[1]]
-
-  num_cols <- setdiff(names(fpdf), c("Player", "Pos", "Team"))
-  fpdf[num_cols][] <- lapply(fpdf[num_cols], function(x) gsub("bye|-$", NA, x))
-  fpdf[num_cols][] <- lapply(fpdf[num_cols], readr::parse_number)
+  fp_url$query <- fp_query_list
+  fp_url_string <- httr::build_url(fp_url)
+  fpdf <- fp_get_data(fp_url_string)
 
   fpdf <- tibble::add_column(fpdf,
                              season     = season,
                              start_week = start_week,
                              end_week   = end_week,
-                             format     = format,
-                             .after     = "Team")
+                             scoring    = scoring,
+                             .after     = "team")
 
-  clean_names <- janitor::make_clean_names(names(fpdf))
-  clean_names <- gsub(pattern = "x", replacement = "w", clean_names)
-  names(fpdf) <- clean_names
-
-  tibble::as_tibble(fpdf)
+  fpdf
 }

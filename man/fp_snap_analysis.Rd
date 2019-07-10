@@ -5,7 +5,7 @@
 \title{Detailed Analysis of NFL snap counts}
 \usage{
 fp_snap_analysis(pos = "offense", season, start_week = 1,
-  end_week = 17, format = c("half", "ppr", "std"))
+  end_week = 17, scoring = c("half", "ppr", "std"))
 }
 \arguments{
 \item{pos}{\code{Charcater}. Specific position you want to return. Default will return all
@@ -28,9 +28,6 @@ Supported season only go back to \code{2016}}
 \item{start_week}{\code{Numeric}. The starting week. Default is \code{1}}
 
 \item{end_week}{\code{Numeric}. The ending week. Default is \code{17}}
-
-\item{format}{\code{Charcater}. Scoring format. \code{"half"}, \code{"ppr"}, \code{"std"}.
-The default is \code{"half"}}
 }
 \value{
 a tibble
@@ -49,7 +46,7 @@ Detailed Analysis of NFL snap counts
 fp_snap_analysis(season = 2018, start_week = 5, end_week = 9)
 
 # TE's in the 2017 season using standard scoring
-fp_snap_analysis(pos = "TE", season = 2017, format = "std")
+fp_snap_analysis(pos = "TE", season = 2017, scoring = "std")
 
 # all defensive positions for the current NFL season in week 1
 fp_snap_analysis(pos = "defense", start_week = 1, end_week = start_week)

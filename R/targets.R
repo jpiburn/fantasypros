@@ -30,46 +30,22 @@
 #' fp_targets(pos = "WR")
 fp_targets <- function(pos = "offense", season) {
 
-  if (missing(pos)) pos <- "offense"
-  else pos <- tolower(pos)
-
   if (missing(season)) season <- as.numeric(format(Sys.Date(), "%Y"))
 
-  season_url <- paste0("year=", season)
+  fp_query_list <- fp_build_query_list(season = season)
+  pos_path <- fp_format_pos_path(pos)
 
-  pos_url <- switch(pos,
-                    "offense" = "",
-                    "off"     = "",
-                    "rb"      = "rb.php",
-                    "wr"      = "wr.php",
-                    "te"      = "te.php"
-                    )
-
-  if (is.null(pos_url)) {
-    warning(
-      paste("position", pos, "not recognized. Defaulting to all offensive positions"),
-      call. = FALSE
-    )
-    pos_url <- ""
-  }
-
-  fp_url <- paste0(
-    "https://www.fantasypros.com/nfl/reports/targets/",
-    pos_url, "?", season_url
+  fp_url <- fp_build_url(
+    path_list = list("nfl", "reports", "targets", pos_path)
   )
 
-  fp_html <- xml2::read_html(fp_url)
-  fpdf <- rvest::html_table(fp_html)[[1]]
+  fp_url$query <- fp_query_list
+  fp_url_string <- httr::build_url(fp_url)
+  fpdf <- fp_get_data(fp_url_string)
+  fpdf <- tibble::add_column(fpdf,
+                             season = season,
+                             .after = "team"
+  )
 
-  num_cols <- setdiff(names(fpdf), c("Player", "Pos", "Team"))
-  fpdf[num_cols][] <- lapply(fpdf[num_cols], function(x) gsub("bye|-", NA, x))
-  fpdf[num_cols][] <- lapply(fpdf[num_cols], readr::parse_number)
-
-  fpdf <- tibble::add_column(fpdf, "season" = season, .after = "Team")
-
-  clean_names <- janitor::make_clean_names(names(fpdf))
-  clean_names <- gsub(pattern = "x", replacement = "w", clean_names)
-  names(fpdf) <- clean_names
-
-  tibble::as_tibble(fpdf)
+  fpdf
 }
