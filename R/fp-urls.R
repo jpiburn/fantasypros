@@ -76,3 +76,88 @@ fp_get_data <- function(url, skip_parse_cols = c("Player", "Pos", "Team")) {
 
   tibble::as_tibble(fpdf)
 }
+
+fp_format_rankings_pos_path <- function(scoring, pos) {
+
+  if (is.null(pos)) return("consensus-cheatsheets.php")
+
+  pos <- tolower(pos)
+
+  if (pos == "overall") {
+    pos_path <- switch(scoring,
+                       "std"  = "consensus-cheatsheets.php",
+                       "half" = "half-point-ppr-cheatsheets.php",
+                       "ppr"  = "ppr-cheatsheets.php"
+                       )
+    return(pos_path)
+    }
+
+  if (pos %in% c("rb", "wr", "te")) {
+    if (scoring == "half") pos_prepend <- "half-point-ppr-"
+    else if (scoring == "ppr") pos_prepend <- "ppr-"
+    else pos_prepend <- ""
+  }
+  else{
+  pos_prepend <- ""
+  }
+
+  pos_path <- paste0(pos_prepend, pos, "-cheatsheets.php")
+
+  gsub("\\s", "-", pos_path)
+}
+
+
+fp_get_ranking_data <- function(url, pos) {
+
+  fp_html <- xml2::read_html(url)
+  fpdf <- rvest::html_table(fp_html, fill = TRUE)[[1]]
+  fpdf <- fpdf[ , !is.na(names(fpdf))]
+
+  # depending on which position you query this column is named differntly
+  # so rename it up front
+  player_info_col <- which(grepl("team", names(fpdf), ignore.case = TRUE))
+  names(fpdf)[player_info_col] <- "player_info"
+
+  junk_cols <- names(fpdf) %in% c(NA, "WSID", "Notes", "WSIS")
+  fpdf <- fpdf[ , !junk_cols]
+
+  junk_rows <- grepl("\r|\n|function\\(\\)|}\\);|&nbsp", fpdf$player_info)
+  fpdf <- fpdf[!junk_rows, ]
+
+  fpdf <- dplyr::mutate(fpdf,
+            tier = dplyr::case_when(
+              grepl("Tier", Rank) ~ readr::parse_number(Rank)
+             )
+            )
+  fpdf <- tidyr::fill(fpdf, tier)
+
+  num_cols <- !grepl("player_info|pos|tier|notes", names(fpdf), ignore.case = TRUE)
+  num_cols <- names(fpdf)[num_cols]
+  fpdf[num_cols][] <- lapply(fpdf[num_cols], readr::parse_number)
+
+  fpdf$player_info <- readr::parse_character(fpdf$player_info)
+  fpdf <- fpdf[!is.na(fpdf$player_info), ]
+
+  fpdf$player <- gsub("(?<=[a-z]|I|V|Jr\\.)[A-Z]\\..*|\\(.*\\).* ",
+                      replacement = "",
+                      fpdf$player_info, perl = TRUE)
+  fpdf$team <- sapply(stringr::str_split(fpdf$player_info, " "),
+                      function(x) x[length(x)]
+  )
+
+  if (!"Pos" %in% names(fpdf)) fpdf$Pos <- paste0(pos, fpdf$Rank)
+
+  fpdf$pos <- gsub("[0-9]", "", fpdf$Pos)
+  fpdf$pos_rank <- readr::parse_number(fpdf$Pos)
+  fpdf$player_info <- NULL
+  fpdf$Pos <- NULL
+
+  fpdf <- dplyr::select(fpdf,
+                        Rank,
+                        tier:pos_rank,
+                        dplyr::everything()
+  )
+
+  fpdf <- janitor::clean_names(fpdf)
+  tibble::as_tibble(fpdf)
+}

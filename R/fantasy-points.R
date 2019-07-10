@@ -74,7 +74,7 @@ fp_fantasy_points <- function(pos = "overall", season, start_week = 1, end_week 
                              start_week = start_week,
                              end_week   = end_week,
                              scoring    = scoring,
-                             .after     = "position")
+                             .after     = "team")
 
   fpdf
 }
