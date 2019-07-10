@@ -5,9 +5,14 @@
 
 <!-- badges: start -->
 
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-The goal of fantasypros is to …
+The goal of `fantasypros` is to provide easy and reproducable access to
+data provided on [fantasypros](https://www.fantasypros.com). The intital
+focus is on NFL and fantasy football data, but other sports are planned
+to be added
 
 ## Installation
 
@@ -29,6 +34,61 @@ devtools::install_github("jpiburn/fantasypros")
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
+
+## Visualizing Expert Consensus Ranking
+
+``` r
+library(fantasypros)
+library(ggplot2)
+library(dplyr)
+
+fp_draft_rankings("RB") %>%
+  filter(rank <= 40) %>%
+  ggplot(
+    aes(x = avg, y = adp, colour = factor(tier), label = player)
+    ) +
+  geom_errorbarh(
+    aes(xmin = avg - std_dev, xmax = avg + std_dev), 
+    height = 0, 
+    alpha = 0.6, 
+    size = 0.9,  
+    show.legend = FALSE
+    ) +
+  geom_point(size = 1.5) +
+  scale_x_reverse(
+    breaks = c(1, seq(10,60, 10))
+    ) +
+  scale_y_reverse(
+    breaks = c(1, seq(10,60, 10))
+    ) +
+  ggsci::scale_color_npg() +
+  hrbrthemes::theme_ipsum_rc(
+    base_size = 11, 
+    axis_title_size = 9
+    ) +
+  labs(
+    title  = "RB Expert Consensus Rank vs Average Draft Position",
+    colour = "Tier",
+    x      = "Expert Consensus Rank",
+    y       = "Average Draft Position",
+    caption = "Data: fantasypros.com"
+  ) + 
+  geom_text(
+    aes(x = avg + std_dev), 
+    size = 2.5, 
+    nudge_x = -3.5, 
+    show.legend = FALSE,
+    fontface = "bold"
+    ) +
+  theme(
+    legend.position = "bottom",
+    ) +
+  guides(
+    colour = guide_legend(nrow = 1)
+    )
+```
+
+<img src="man/figures/README-rb-erc-chart-1.png" width="100%" />
 
 ## Weekly Snap Counts
 
@@ -80,18 +140,18 @@ library(fantasypros)
 # all offensive positions for weeks 5-9 of the 2018 season
 fp_snap_analysis(season = 2018, start_week = 5, end_week = 9)
 #> # A tibble: 423 x 17
-#>    player pos   team  season start_week end_week format games snaps
-#>    <chr>  <chr> <chr>  <dbl>      <dbl>    <dbl> <chr>  <dbl> <dbl>
-#>  1 Aaron~ QB    GB      2018          5        9 half       4   278
-#>  2 Adria~ RB    WAS     2018          5        9 half       5   157
-#>  3 Alex ~ QB    WAS     2018          5        9 half       5   328
-#>  4 Ben R~ QB    PIT     2018          5        9 half       4   283
-#>  5 Benja~ TE    NO      2018          5        9 half       4   119
-#>  6 Brian~ QB    NE      2018          5        9 half       1     2
-#>  7 Chase~ QB    CHI     2018          5        9 half       2     4
-#>  8 Danny~ WR    MIA     2018          5        9 half       5   295
-#>  9 DeSea~ WR    TB      2018          5        9 half       4   155
-#> 10 Drew ~ QB    NO      2018          5        9 half       4   258
+#>    player pos   team  season start_week end_week scoring games snaps
+#>    <chr>  <chr> <chr>  <dbl>      <dbl>    <dbl> <chr>   <dbl> <dbl>
+#>  1 Aaron~ QB    GB      2018          5        9 half        4   278
+#>  2 Adria~ RB    WAS     2018          5        9 half        5   157
+#>  3 Alex ~ QB    WAS     2018          5        9 half        5   328
+#>  4 Ben R~ QB    PIT     2018          5        9 half        4   283
+#>  5 Benja~ TE    NO      2018          5        9 half        4   119
+#>  6 Brian~ QB    NE      2018          5        9 half        1     2
+#>  7 Chase~ QB    CHI     2018          5        9 half        2     4
+#>  8 Danny~ WR    MIA     2018          5        9 half        5   295
+#>  9 DeSea~ WR    TB      2018          5        9 half        4   155
+#> 10 Drew ~ QB    NO      2018          5        9 half        4   258
 #> # ... with 413 more rows, and 8 more variables: snaps_gm <dbl>,
 #> #   snap_percent <dbl>, rush_percent <dbl>, tgt_percent <dbl>,
 #> #   touch_percent <dbl>, util_percent <dbl>, fantasy_pts <dbl>,

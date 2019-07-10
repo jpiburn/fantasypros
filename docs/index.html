@@ -67,8 +67,8 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#fantasypros" class="anchor"></a>fantasypros</h1></div>
 <!-- badges: start -->
-<!-- badges: end -->
-<p>The goal of fantasypros is to …</p>
+
+<p>The goal of <code>fantasypros</code> is to provide easy and reproducable access to data provided on <a href="https://www.fantasypros.com">fantasypros</a>. The intital focus is on NFL and fantasy football data, but other sports are planned to be added</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -84,95 +84,148 @@
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
 </div>
+<div id="visualizing-expert-consensus-ranking" class="section level2">
+<h2 class="hasAnchor">
+<a href="#visualizing-expert-consensus-ranking" class="anchor"></a>Visualizing Expert Consensus Ranking</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fantasypros)</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw"><a href="reference/fp_draft_rankings.html">fp_draft_rankings</a></span>(<span class="st">"RB"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(rank <span class="op">&lt;=</span><span class="st"> </span><span class="dv">40</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(</a>
+<a class="sourceLine" id="cb3-8" title="8">    <span class="kw">aes</span>(<span class="dt">x =</span> avg, <span class="dt">y =</span> adp, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(tier), <span class="dt">label =</span> player)</a>
+<a class="sourceLine" id="cb3-9" title="9">    ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="st">  </span><span class="kw">geom_errorbarh</span>(</a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="kw">aes</span>(<span class="dt">xmin =</span> avg <span class="op">-</span><span class="st"> </span>std_dev, <span class="dt">xmax =</span> avg <span class="op">+</span><span class="st"> </span>std_dev), </a>
+<a class="sourceLine" id="cb3-12" title="12">    <span class="dt">height =</span> <span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="dt">alpha =</span> <span class="fl">0.6</span>, </a>
+<a class="sourceLine" id="cb3-14" title="14">    <span class="dt">size =</span> <span class="fl">0.9</span>,  </a>
+<a class="sourceLine" id="cb3-15" title="15">    <span class="dt">show.legend =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb3-16" title="16">    ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="st">  </span><span class="kw">scale_x_reverse</span>(</a>
+<a class="sourceLine" id="cb3-19" title="19">    <span class="dt">breaks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">10</span>,<span class="dv">60</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb3-20" title="20">    ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="st">  </span><span class="kw">scale_y_reverse</span>(</a>
+<a class="sourceLine" id="cb3-22" title="22">    <span class="dt">breaks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">10</span>,<span class="dv">60</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb3-23" title="23">    ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-24" title="24"><span class="st">  </span>ggsci<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggsci/topics/scale_npg">scale_color_npg</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-25" title="25"><span class="st">  </span>hrbrthemes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/hrbrthemes/topics/theme_ipsum_rc">theme_ipsum_rc</a></span>(</a>
+<a class="sourceLine" id="cb3-26" title="26">    <span class="dt">base_size =</span> <span class="dv">11</span>, </a>
+<a class="sourceLine" id="cb3-27" title="27">    <span class="dt">axis_title_size =</span> <span class="dv">9</span></a>
+<a class="sourceLine" id="cb3-28" title="28">    ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-29" title="29"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb3-30" title="30">    <span class="dt">title  =</span> <span class="st">"RB Expert Consensus Rank vs Average Draft Position"</span>,</a>
+<a class="sourceLine" id="cb3-31" title="31">    <span class="dt">colour =</span> <span class="st">"Tier"</span>,</a>
+<a class="sourceLine" id="cb3-32" title="32">    <span class="dt">x      =</span> <span class="st">"Expert Consensus Rank"</span>,</a>
+<a class="sourceLine" id="cb3-33" title="33">    <span class="dt">y       =</span> <span class="st">"Average Draft Position"</span>,</a>
+<a class="sourceLine" id="cb3-34" title="34">    <span class="dt">caption =</span> <span class="st">"Data: fantasypros.com"</span></a>
+<a class="sourceLine" id="cb3-35" title="35">  ) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-36" title="36"><span class="st">  </span><span class="kw">geom_text</span>(</a>
+<a class="sourceLine" id="cb3-37" title="37">    <span class="kw">aes</span>(<span class="dt">x =</span> avg <span class="op">+</span><span class="st"> </span>std_dev), </a>
+<a class="sourceLine" id="cb3-38" title="38">    <span class="dt">size =</span> <span class="fl">2.5</span>, </a>
+<a class="sourceLine" id="cb3-39" title="39">    <span class="dt">nudge_x =</span> <span class="fl">-3.5</span>, </a>
+<a class="sourceLine" id="cb3-40" title="40">    <span class="dt">show.legend =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb3-41" title="41">    <span class="dt">fontface =</span> <span class="st">"bold"</span></a>
+<a class="sourceLine" id="cb3-42" title="42">    ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-43" title="43"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb3-44" title="44">    <span class="dt">legend.position =</span> <span class="st">"bottom"</span>,</a>
+<a class="sourceLine" id="cb3-45" title="45">    ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-46" title="46"><span class="st">  </span><span class="kw">guides</span>(</a>
+<a class="sourceLine" id="cb3-47" title="47">    <span class="dt">colour =</span> <span class="kw">guide_legend</span>(<span class="dt">nrow =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-48" title="48">    )</a></code></pre></div>
+<p><img src="reference/figures/README-rb-erc-chart-1.png" width="100%"></p>
+</div>
 <div id="weekly-snap-counts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#weekly-snap-counts" class="anchor"></a>Weekly Snap Counts</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fantasypros)</a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="reference/fp_snap_counts.html">fp_snap_counts</a></span>(<span class="dt">season =</span> <span class="dv">2018</span>)</a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; # A tibble: 505 x 23</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt;    player pos   team  season    w1    w2    w3    w4    w5    w6    w7</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt;  1 Aaron~ QB    GB      2018    46    77    69    76    81    71    NA</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt;  2 Adria~ RB    WAS     2018    42    25    32    NA    13    37    34</span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt;  3 Alex ~ QB    WAS     2018    79    74    61    NA    61    70    60</span></a>
-<a class="sourceLine" id="cb3-10" title="10"><span class="co">#&gt;  4 Ben R~ QB    PIT     2018    84    82    66    62    60    73    NA</span></a>
-<a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt;  5 Benja~ TE    NE      2018    51    54    45    37    36     0    36</span></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt;  6 Brian~ QB    NE      2018     0     0     0     4     0     0     0</span></a>
-<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt;  7 Chad ~ QB    KC      2018     0     0     0     0     0     0     0</span></a>
-<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt;  8 Chase~ QB    CHI     2018     0     0     0     3    NA     0     1</span></a>
-<a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt;  9 Danny~ WR    DET     2018    45    44    31    42    53    75    55</span></a>
-<a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt; 10 Delan~ TE    TEN     2018    39     0     0     0     0     0     0</span></a>
-<a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; # ... with 495 more rows, and 12 more variables: w8 &lt;dbl&gt;, w9 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; #   w10 &lt;dbl&gt;, w11 &lt;dbl&gt;, w12 &lt;dbl&gt;, w13 &lt;dbl&gt;, w14 &lt;dbl&gt;, w15 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb3-19" title="19"><span class="co">#&gt; #   w16 &lt;dbl&gt;, w17 &lt;dbl&gt;, ttl &lt;dbl&gt;, avg &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb3-20" title="20"></a>
-<a class="sourceLine" id="cb3-21" title="21"><span class="kw"><a href="reference/fp_snap_counts.html">fp_snap_counts</a></span>(<span class="dt">pos =</span> <span class="st">"defense"</span>, <span class="dt">season =</span> <span class="dv">2018</span>, <span class="dt">percentage =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb3-22" title="22"><span class="co">#&gt; # A tibble: 769 x 23</span></a>
-<a class="sourceLine" id="cb3-23" title="23"><span class="co">#&gt;    player pos   team  season    w1    w2    w3    w4    w5    w6    w7</span></a>
-<a class="sourceLine" id="cb3-24" title="24"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb3-25" title="25"><span class="co">#&gt;  1 Patri~ CB    ARI     2018    99   100    99    98    97   100    98</span></a>
-<a class="sourceLine" id="cb3-26" title="26"><span class="co">#&gt;  2 Adria~ DE    ATL     2018    30    30    42    37    51    33    40</span></a>
-<a class="sourceLine" id="cb3-27" title="27"><span class="co">#&gt;  3 Princ~ CB    CHI     2018    98   100    50     0    NA    67    98</span></a>
-<a class="sourceLine" id="cb3-28" title="28"><span class="co">#&gt;  4 Marce~ DT    JAC     2018    65    75    68    57    66    60    53</span></a>
-<a class="sourceLine" id="cb3-29" title="29"><span class="co">#&gt;  5 Camer~ DE    PIT     2018    85    86    73    74    71    80    NA</span></a>
-<a class="sourceLine" id="cb3-30" title="30"><span class="co">#&gt;  6 Von M~ LB    DEN     2018    88    77    68    68    74    70    85</span></a>
-<a class="sourceLine" id="cb3-31" title="31"><span class="co">#&gt;  7 Rober~ DE    DAL     2018    59    51    71    56    68    71    58</span></a>
-<a class="sourceLine" id="cb3-32" title="32"><span class="co">#&gt;  8 J.J. ~ DE    HOU     2018    93   100    84    87    90    87    90</span></a>
-<a class="sourceLine" id="cb3-33" title="33"><span class="co">#&gt;  9 Justi~ DE    IND     2018    77    85    94    97    27     0     0</span></a>
-<a class="sourceLine" id="cb3-34" title="34"><span class="co">#&gt; 10 Ryan ~ LB    WAS     2018    68    82    83    NA    73    80    74</span></a>
-<a class="sourceLine" id="cb3-35" title="35"><span class="co">#&gt; # ... with 759 more rows, and 12 more variables: w8 &lt;dbl&gt;, w9 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb3-36" title="36"><span class="co">#&gt; #   w10 &lt;dbl&gt;, w11 &lt;dbl&gt;, w12 &lt;dbl&gt;, w13 &lt;dbl&gt;, w14 &lt;dbl&gt;, w15 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb3-37" title="37"><span class="co">#&gt; #   w16 &lt;dbl&gt;, w17 &lt;dbl&gt;, ttl &lt;dbl&gt;, avg &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fantasypros)</a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="reference/fp_snap_counts.html">fp_snap_counts</a></span>(<span class="dt">season =</span> <span class="dv">2018</span>)</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; # A tibble: 505 x 23</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt;    player pos   team  season    w1    w2    w3    w4    w5    w6    w7</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt;  1 Aaron~ QB    GB      2018    46    77    69    76    81    71    NA</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt;  2 Adria~ RB    WAS     2018    42    25    32    NA    13    37    34</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt;  3 Alex ~ QB    WAS     2018    79    74    61    NA    61    70    60</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt;  4 Ben R~ QB    PIT     2018    84    82    66    62    60    73    NA</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt;  5 Benja~ TE    NE      2018    51    54    45    37    36     0    36</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt;  6 Brian~ QB    NE      2018     0     0     0     4     0     0     0</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt;  7 Chad ~ QB    KC      2018     0     0     0     0     0     0     0</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;  8 Chase~ QB    CHI     2018     0     0     0     3    NA     0     1</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt;  9 Danny~ WR    DET     2018    45    44    31    42    53    75    55</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 10 Delan~ TE    TEN     2018    39     0     0     0     0     0     0</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; # ... with 495 more rows, and 12 more variables: w8 &lt;dbl&gt;, w9 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; #   w10 &lt;dbl&gt;, w11 &lt;dbl&gt;, w12 &lt;dbl&gt;, w13 &lt;dbl&gt;, w14 &lt;dbl&gt;, w15 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; #   w16 &lt;dbl&gt;, w17 &lt;dbl&gt;, ttl &lt;dbl&gt;, avg &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-20" title="20"></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="kw"><a href="reference/fp_snap_counts.html">fp_snap_counts</a></span>(<span class="dt">pos =</span> <span class="st">"defense"</span>, <span class="dt">season =</span> <span class="dv">2018</span>, <span class="dt">percentage =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="co">#&gt; # A tibble: 769 x 23</span></a>
+<a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt;    player pos   team  season    w1    w2    w3    w4    w5    w6    w7</span></a>
+<a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt;  1 Patri~ CB    ARI     2018    99   100    99    98    97   100    98</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt;  2 Adria~ DE    ATL     2018    30    30    42    37    51    33    40</span></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="co">#&gt;  3 Princ~ CB    CHI     2018    98   100    50     0    NA    67    98</span></a>
+<a class="sourceLine" id="cb4-28" title="28"><span class="co">#&gt;  4 Marce~ DT    JAC     2018    65    75    68    57    66    60    53</span></a>
+<a class="sourceLine" id="cb4-29" title="29"><span class="co">#&gt;  5 Camer~ DE    PIT     2018    85    86    73    74    71    80    NA</span></a>
+<a class="sourceLine" id="cb4-30" title="30"><span class="co">#&gt;  6 Von M~ LB    DEN     2018    88    77    68    68    74    70    85</span></a>
+<a class="sourceLine" id="cb4-31" title="31"><span class="co">#&gt;  7 Rober~ DE    DAL     2018    59    51    71    56    68    71    58</span></a>
+<a class="sourceLine" id="cb4-32" title="32"><span class="co">#&gt;  8 J.J. ~ DE    HOU     2018    93   100    84    87    90    87    90</span></a>
+<a class="sourceLine" id="cb4-33" title="33"><span class="co">#&gt;  9 Justi~ DE    IND     2018    77    85    94    97    27     0     0</span></a>
+<a class="sourceLine" id="cb4-34" title="34"><span class="co">#&gt; 10 Ryan ~ LB    WAS     2018    68    82    83    NA    73    80    74</span></a>
+<a class="sourceLine" id="cb4-35" title="35"><span class="co">#&gt; # ... with 759 more rows, and 12 more variables: w8 &lt;dbl&gt;, w9 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb4-36" title="36"><span class="co">#&gt; #   w10 &lt;dbl&gt;, w11 &lt;dbl&gt;, w12 &lt;dbl&gt;, w13 &lt;dbl&gt;, w14 &lt;dbl&gt;, w15 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="co">#&gt; #   w16 &lt;dbl&gt;, w17 &lt;dbl&gt;, ttl &lt;dbl&gt;, avg &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="detailed-snap-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#detailed-snap-analysis" class="anchor"></a>Detailed Snap Analysis</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fantasypros)</a>
-<a class="sourceLine" id="cb4-2" title="2"></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co"># all offensive positions for weeks 5-9 of the 2018 season</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="kw"><a href="reference/fp_snap_analysis.html">fp_snap_analysis</a></span>(<span class="dt">season =</span> <span class="dv">2018</span>, <span class="dt">start_week =</span> <span class="dv">5</span>, <span class="dt">end_week =</span> <span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; # A tibble: 423 x 17</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt;    player pos   team  season start_week end_week scoring games snaps</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt;  1 Aaron~ QB    GB      2018          5        9 half        4   278</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt;  2 Adria~ RB    WAS     2018          5        9 half        5   157</span></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt;  3 Alex ~ QB    WAS     2018          5        9 half        5   328</span></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt;  4 Ben R~ QB    PIT     2018          5        9 half        4   283</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt;  5 Benja~ TE    NO      2018          5        9 half        4   119</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt;  6 Brian~ QB    NE      2018          5        9 half        1     2</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;  7 Chase~ QB    CHI     2018          5        9 half        2     4</span></a>
-<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt;  8 Danny~ WR    MIA     2018          5        9 half        5   295</span></a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt;  9 DeSea~ WR    TB      2018          5        9 half        4   155</span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 10 Drew ~ QB    NO      2018          5        9 half        4   258</span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; # ... with 413 more rows, and 8 more variables: snaps_gm &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; #   snap_percent &lt;dbl&gt;, rush_percent &lt;dbl&gt;, tgt_percent &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; #   touch_percent &lt;dbl&gt;, util_percent &lt;dbl&gt;, fantasy_pts &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt; #   pts_100_snaps &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fantasypros)</a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co"># all offensive positions for weeks 5-9 of the 2018 season</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw"><a href="reference/fp_snap_analysis.html">fp_snap_analysis</a></span>(<span class="dt">season =</span> <span class="dv">2018</span>, <span class="dt">start_week =</span> <span class="dv">5</span>, <span class="dt">end_week =</span> <span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; # A tibble: 423 x 17</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt;    player pos   team  season start_week end_week scoring games snaps</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt;  1 Aaron~ QB    GB      2018          5        9 half        4   278</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt;  2 Adria~ RB    WAS     2018          5        9 half        5   157</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt;  3 Alex ~ QB    WAS     2018          5        9 half        5   328</span></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt;  4 Ben R~ QB    PIT     2018          5        9 half        4   283</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt;  5 Benja~ TE    NO      2018          5        9 half        4   119</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt;  6 Brian~ QB    NE      2018          5        9 half        1     2</span></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="co">#&gt;  7 Chase~ QB    CHI     2018          5        9 half        2     4</span></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt;  8 Danny~ WR    MIA     2018          5        9 half        5   295</span></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="co">#&gt;  9 DeSea~ WR    TB      2018          5        9 half        4   155</span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="co">#&gt; 10 Drew ~ QB    NO      2018          5        9 half        4   258</span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="co">#&gt; # ... with 413 more rows, and 8 more variables: snaps_gm &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="co">#&gt; #   snap_percent &lt;dbl&gt;, rush_percent &lt;dbl&gt;, tgt_percent &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb5-20" title="20"><span class="co">#&gt; #   touch_percent &lt;dbl&gt;, util_percent &lt;dbl&gt;, fantasy_pts &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="co">#&gt; #   pts_100_snaps &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="weekly-targets" class="section level2">
 <h2 class="hasAnchor">
 <a href="#weekly-targets" class="anchor"></a>Weekly Targets</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fantasypros)</a>
-<a class="sourceLine" id="cb5-2" title="2"></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co"># total targets for TE's in the 2014 season</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="kw"><a href="reference/fp_targets.html">fp_targets</a></span>(<span class="dt">pos =</span> <span class="st">"TE"</span>, <span class="dt">season =</span> <span class="dv">2014</span>)</a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; # A tibble: 134 x 22</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt;    player team  season    w1    w2    w3    w4    w5    w6    w7    w8</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt;  1 Zach ~ SEA     2014     4     1     2    NA    NA    NA    NA    NA</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt;  2 Luke ~ SEA     2014     1     0     0    NA     4     6     0     4</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt;  3 Andre~ GB      2014     4     2     5     0     2     5     1     3</span></a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt;  4 Ryan ~ CLE     2014     0     0     0     0     0     0     0     0</span></a>
-<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt;  5 Richa~ GB      2014     0     1     0     2     1     0     2     5</span></a>
-<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt;  6 Antho~ KC      2014     6     4     2     1     7    NA     1     4</span></a>
-<a class="sourceLine" id="cb5-14" title="14"><span class="co">#&gt;  7 Travi~ KC      2014     5     6     4     9     3    NA     4     6</span></a>
-<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt;  8 Taylo~ TEN     2014     2     1     1     0     0     0     0     0</span></a>
-<a class="sourceLine" id="cb5-16" title="16"><span class="co">#&gt;  9 Delan~ TEN     2014     4    14     7     7     4     8     5     9</span></a>
-<a class="sourceLine" id="cb5-17" title="17"><span class="co">#&gt; 10 Beau ~ TEN     2014     0     0     0     0     0     0     0     0</span></a>
-<a class="sourceLine" id="cb5-18" title="18"><span class="co">#&gt; # ... with 124 more rows, and 11 more variables: w9 &lt;dbl&gt;, w10 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb5-19" title="19"><span class="co">#&gt; #   w11 &lt;dbl&gt;, w12 &lt;dbl&gt;, w13 &lt;dbl&gt;, w14 &lt;dbl&gt;, w15 &lt;dbl&gt;, w16 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb5-20" title="20"><span class="co">#&gt; #   w17 &lt;dbl&gt;, ttl &lt;dbl&gt;, avg &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fantasypros)</a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># total targets for TE's in the 2014 season</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="kw"><a href="reference/fp_targets.html">fp_targets</a></span>(<span class="dt">pos =</span> <span class="st">"TE"</span>, <span class="dt">season =</span> <span class="dv">2014</span>)</a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; # A tibble: 134 x 22</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt;    player team  season    w1    w2    w3    w4    w5    w6    w7    w8</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt;  1 Zach ~ SEA     2014     4     1     2    NA    NA    NA    NA    NA</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt;  2 Luke ~ SEA     2014     1     0     0    NA     4     6     0     4</span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt;  3 Andre~ GB      2014     4     2     5     0     2     5     1     3</span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt;  4 Ryan ~ CLE     2014     0     0     0     0     0     0     0     0</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt;  5 Richa~ GB      2014     0     1     0     2     1     0     2     5</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt;  6 Antho~ KC      2014     6     4     2     1     7    NA     1     4</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt;  7 Travi~ KC      2014     5     6     4     9     3    NA     4     6</span></a>
+<a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt;  8 Taylo~ TEN     2014     2     1     1     0     0     0     0     0</span></a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt;  9 Delan~ TEN     2014     4    14     7     7     4     8     5     9</span></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt; 10 Beau ~ TEN     2014     0     0     0     0     0     0     0     0</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt; # ... with 124 more rows, and 11 more variables: w9 &lt;dbl&gt;, w10 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="co">#&gt; #   w11 &lt;dbl&gt;, w12 &lt;dbl&gt;, w13 &lt;dbl&gt;, w14 &lt;dbl&gt;, w15 &lt;dbl&gt;, w16 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb6-20" title="20"><span class="co">#&gt; #   w17 &lt;dbl&gt;, ttl &lt;dbl&gt;, avg &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 </div>
   </div>
@@ -181,7 +234,8 @@
     <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li>What license is it under?</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="developers">
@@ -191,7 +245,13 @@
 </ul>
 </div>
 
-      </div>
+      <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
+</ul>
+</div>
+</div>
 
 </div>
 
