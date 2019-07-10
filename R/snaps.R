@@ -81,8 +81,8 @@ fp_snap_counts <- function(pos = "offense", season, percentage = FALSE) {
 #' @param season \code{Numeric}. The NFL season. If missing it will return the current year's season.
 #'               Supported season only go back to \code{2016}
 #' @param start_week \code{Numeric}. The starting week. Default is \code{1}
-#' @param format
 #' @param end_week \code{Numeric}. The ending week. Default is \code{17}
+#' @param scoring \code{Charcater}. Fantasy scoring format. Default is \code{"half"}
 #'
 #' @return a tibble
 #' @export

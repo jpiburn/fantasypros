@@ -28,6 +28,8 @@ Supported season only go back to \code{2016}}
 \item{start_week}{\code{Numeric}. The starting week. Default is \code{1}}
 
 \item{end_week}{\code{Numeric}. The ending week. Default is \code{17}}
+
+\item{scoring}{\code{Charcater}. Fantasy scoring format. Default is \code{"half"}}
 }
 \value{
 a tibble
