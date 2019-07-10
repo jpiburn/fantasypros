@@ -38,14 +38,29 @@ devtools::install_github("jpiburn/fantasypros")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example, message=FALSE}
+## Weekly Snap Counts
+```{r snap-counts, message=FALSE}
 library(fantasypros)
 
-fp_snaps(season = 2018)
+fp_snap_counts(season = 2018)
 
-fp_snaps(pos = "defense", season = 2018, percentage = TRUE)
+fp_snap_counts(pos = "defense", season = 2018, percentage = TRUE)
+
+```
+
+
+## Detailed Snap Analysis
+```{r snap-analysis, message=FALSE}
+library(fantasypros)
+
+# all offensive positions for weeks 5-9 of the 2018 season
+fp_snap_analysis(season = 2018, start_week = 5, end_week = 9)
+```
+
+## Weekly Targets
+```{r targets, message=FALSE}
+library(fantasypros)
 
 # total targets for TE's in the 2014 season
 fp_targets(pos = "TE", season = 2014)
 ```
-

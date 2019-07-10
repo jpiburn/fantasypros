@@ -30,10 +30,12 @@ devtools::install_github("jpiburn/fantasypros")
 
 This is a basic example which shows you how to solve a common problem:
 
+## Weekly Snap Counts
+
 ``` r
 library(fantasypros)
 
-fp_snaps(season = 2018)
+fp_snap_counts(season = 2018)
 #> # A tibble: 505 x 23
 #>    player pos   team  season    w1    w2    w3    w4    w5    w6    w7
 #>    <chr>  <chr> <chr>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
@@ -51,7 +53,7 @@ fp_snaps(season = 2018)
 #> #   w10 <dbl>, w11 <dbl>, w12 <dbl>, w13 <dbl>, w14 <dbl>, w15 <dbl>,
 #> #   w16 <dbl>, w17 <dbl>, ttl <dbl>, avg <dbl>
 
-fp_snaps(pos = "defense", season = 2018, percentage = TRUE)
+fp_snap_counts(pos = "defense", season = 2018, percentage = TRUE)
 #> # A tibble: 769 x 23
 #>    player pos   team  season    w1    w2    w3    w4    w5    w6    w7
 #>    <chr>  <chr> <chr>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
@@ -68,6 +70,38 @@ fp_snaps(pos = "defense", season = 2018, percentage = TRUE)
 #> # ... with 759 more rows, and 12 more variables: w8 <dbl>, w9 <dbl>,
 #> #   w10 <dbl>, w11 <dbl>, w12 <dbl>, w13 <dbl>, w14 <dbl>, w15 <dbl>,
 #> #   w16 <dbl>, w17 <dbl>, ttl <dbl>, avg <dbl>
+```
+
+## Detailed Snap Analysis
+
+``` r
+library(fantasypros)
+
+# all offensive positions for weeks 5-9 of the 2018 season
+fp_snap_analysis(season = 2018, start_week = 5, end_week = 9)
+#> # A tibble: 423 x 17
+#>    player pos   team  season start_week end_week format games snaps
+#>    <chr>  <chr> <chr>  <dbl>      <dbl>    <dbl> <chr>  <dbl> <dbl>
+#>  1 Aaron~ QB    GB      2018          5        9 half       4   278
+#>  2 Adria~ RB    WAS     2018          5        9 half       5   157
+#>  3 Alex ~ QB    WAS     2018          5        9 half       5   328
+#>  4 Ben R~ QB    PIT     2018          5        9 half       4   283
+#>  5 Benja~ TE    NO      2018          5        9 half       4   119
+#>  6 Brian~ QB    NE      2018          5        9 half       1     2
+#>  7 Chase~ QB    CHI     2018          5        9 half       2     4
+#>  8 Danny~ WR    MIA     2018          5        9 half       5   295
+#>  9 DeSea~ WR    TB      2018          5        9 half       4   155
+#> 10 Drew ~ QB    NO      2018          5        9 half       4   258
+#> # ... with 413 more rows, and 8 more variables: snaps_gm <dbl>,
+#> #   snap_percent <dbl>, rush_percent <dbl>, tgt_percent <dbl>,
+#> #   touch_percent <dbl>, util_percent <dbl>, fantasy_pts <dbl>,
+#> #   pts_100_snaps <dbl>
+```
+
+## Weekly Targets
+
+``` r
+library(fantasypros)
 
 # total targets for TE's in the 2014 season
 fp_targets(pos = "TE", season = 2014)
