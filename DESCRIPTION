@@ -1,11 +1,14 @@
 Type: Package
 Package: fantasypros
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Title: Sports and Fantasy Data from Fantasypros
+Version: 0.1.0.9000
+Authors@R: c(
+  person("Jesse", "Piburn", email = "jesse.piburn@gmail.com", role = c("aut", "cre"))
+  )
+Maintainer: Jesse Piburn
+Description: The goal of the fantasypros R package is to provide easy and reproducable access to data
+    provided on the fantasypros website. The intital focus is on
+    NFL and fantasy football data, but other sports are planned to be added
 License: MIT + file LICENSE
 Imports: 
     dplyr,
