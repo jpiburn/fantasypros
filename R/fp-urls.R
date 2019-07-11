@@ -161,3 +161,45 @@ fp_get_ranking_data <- function(url, pos) {
   fpdf <- janitor::clean_names(fpdf)
   tibble::as_tibble(fpdf)
 }
+
+
+fp_get_stats_data <- function(url, pos) {
+
+  fp_html <- xml2::read_html(url)
+  fpdf <- rvest::html_table(fp_html, fill = TRUE)[[1]]
+
+  if (pos %in% c("qb", "rb", "wr", "te")) {
+    first_row_names <- fpdf[1 , ]
+    second_row_names <- fpdf[2 , ]
+
+    new_row_names <- paste(first_row_names, second_row_names, sep = "_")
+    new_row_names <- gsub("^_|MISC_", "", new_row_names, ignore.case = TRUE)
+
+    fpdf <- fpdf[3:nrow(fpdf), ]
+    names(fpdf) <- new_row_names
+  }
+
+  fpdf$player <- gsub("\\s\\(.*", "", fpdf$Player, perl = TRUE)
+  fpdf$team <- gsub(".*\\s|\\(|\\)", "", fpdf$Player)
+  fpdf$pos <- toupper(pos)
+  fpdf$Player <- NULL
+
+  # this gets columns that are already numbers
+  num_cols <- which(grepl("player|team|pos", names(fpdf), ignore.case = TRUE))
+  already_numeric <- which(sapply(1:ncol(fpdf), function(i) class(fpdf[, i])) != "character")
+
+  num_cols <- sort(unique(c(num_cols, already_numeric)))
+  num_cols <- setdiff(1:ncol(fpdf), num_cols)
+  num_cols <- names(fpdf)[num_cols]
+  fpdf[num_cols][] <- lapply(fpdf[num_cols], readr::parse_number)
+
+  fpdf <- dplyr::select(fpdf,
+                        player,
+                        pos,
+                        team,
+                        dplyr::everything()
+  )
+
+  fpdf <- janitor::clean_names(fpdf)
+  tibble::as_tibble(fpdf)
+}

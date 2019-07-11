@@ -5,7 +5,7 @@ Version: 0.1.0.9000
 Authors@R: c(
   person("Jesse", "Piburn", email = "jesse.piburn@gmail.com", role = c("aut", "cre"))
   )
-Maintainer: Jesse Piburn
+Maintainer: Jesse Piburn <jesse.piburn@gmail.com>
 Description: The goal of the fantasypros R package is to provide easy and reproducable access to data
     provided on the fantasypros website. The intital focus is on
     NFL and fantasy football data, but other sports are planned to be added
