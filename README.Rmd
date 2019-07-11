@@ -52,6 +52,12 @@ fp_draft_rankings("RB") %>%
   ggplot(
     aes(x = avg, y = adp, colour = factor(tier), label = player)
     ) +
+  geom_abline(
+    slop = 1, 
+    intercept = 0,
+    linetype = 2,
+    color = "grey"
+   ) +
   geom_errorbarh(
     aes(xmin = avg - std_dev, xmax = avg + std_dev), 
     height = 0, 
