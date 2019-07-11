@@ -61,15 +61,16 @@ fp_draft_rankings("RB") %>%
     ) +
   geom_point(size = 1.5) +
   scale_x_reverse(
-    breaks = c(1, seq(10,60, 10))
+    breaks = c(1, seq(10,70, 10))
     ) +
   scale_y_reverse(
     breaks = c(1, seq(10,60, 10))
     ) +
   ggsci::scale_color_npg() +
   hrbrthemes::theme_ipsum_rc(
-    base_size = 11, 
-    axis_title_size = 9
+    base_size = 10, 
+    axis_title_size = 9,
+    plot_title_size = 14
     ) +
   labs(
     title  = "RB Expert Consensus Rank vs Average Draft Position",
@@ -80,7 +81,7 @@ fp_draft_rankings("RB") %>%
   ) + 
   geom_text(
     aes(x = avg + std_dev), 
-    size = 2.5, 
+    size = 2, 
     nudge_x = -3.5, 
     show.legend = FALSE,
     fontface = "bold"
