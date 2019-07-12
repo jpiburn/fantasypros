@@ -158,25 +158,25 @@
 <a href="#season-stats" class="anchor"></a>Season Stats</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fantasypros)</a>
 <a class="sourceLine" id="cb4-2" title="2"></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="reference/fp_stats.html">fp_stats</a></span>(<span class="st">"RB"</span>, <span class="dt">season =</span> <span class="dv">2018</span>, <span class="dt">start_week =</span> <span class="dv">3</span>, <span class="dt">end_week =</span> <span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; # A tibble: 332 x 23</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt;    player pos   team  season start_week end_week scoring rushing_att</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="reference/fp_stats.html">fp_stats</a></span>(<span class="st">"QB"</span>, <span class="dt">season =</span> <span class="dv">2018</span>, <span class="dt">start_week =</span> <span class="dv">3</span>, <span class="dt">end_week =</span> <span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; # A tibble: 151 x 23</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt;    player pos   team  season start_week end_week scoring passing_cmp</span></a>
 <a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt;  1 Aaron~ RB    ATL     2018          3        8 half              0</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt;  2 Adria~ RB    WAS     2018          3        8 half            251</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt;  3 Ahman~ RB    GB      2018          3        8 half              0</span></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt;  4 Alber~ RB    JAC     2018          3        8 half              0</span></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt;  5 Alvin~ RB    TEN     2018          3        8 half              0</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt;  6 Antho~ RB    WAS     2018          3        8 half              0</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt;  7 Anton~ RB    LAR     2018          3        8 half              0</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;  8 B.J. ~ RB    TB      2018          3        8 half              0</span></a>
-<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt;  9 Brad ~ RB    CAR     2018          3        8 half              0</span></a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 10 Carey~ RB    WAS     2018          3        8 half              0</span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; # ... with 322 more rows, and 15 more variables: rushing_yds &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; #   rushing_y_a &lt;dbl&gt;, rushing_lg &lt;dbl&gt;, rushing_20 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; #   rushing_td &lt;dbl&gt;, receiving_rec &lt;dbl&gt;, receiving_tgt &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; #   receiving_yds &lt;dbl&gt;, receiving_y_r &lt;dbl&gt;, receiving_td &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt; #   fl &lt;dbl&gt;, g &lt;dbl&gt;, fpts &lt;dbl&gt;, fpts_g &lt;dbl&gt;, own &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt;  1 Aaron~ QB    GB      2018          3        8 half            124</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt;  2 Alex ~ QB    WAS     2018          3        8 half             90</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt;  3 Ben R~ QB    PIT     2018          3        8 half            132</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt;  4 Brett~ QB    TEN     2018          3        8 half              0</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt;  5 Brian~ QB    BUF     2018          3        8 half              0</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt;  6 Brian~ QB    NE      2018          3        8 half              0</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt;  7 Brock~ QB    DET     2018          3        8 half              0</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;  8 Byron~ QB    PIT     2018          3        8 half              0</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt;  9 Chad ~ QB    KC      2018          3        8 half              0</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 10 Chad ~ QB    MIA     2018          3        8 half              0</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; # ... with 141 more rows, and 15 more variables: passing_att &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; #   passing_pct &lt;dbl&gt;, passing_yds &lt;dbl&gt;, passing_y_a &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; #   passing_td &lt;dbl&gt;, passing_int &lt;dbl&gt;, passing_sacks &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; #   rushing_att &lt;dbl&gt;, rushing_yds &lt;dbl&gt;, rushing_td &lt;dbl&gt;, fl &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt; #   g &lt;dbl&gt;, fpts &lt;dbl&gt;, fpts_g &lt;dbl&gt;, own &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="weekly-snap-counts" class="section level2">
 <h2 class="hasAnchor">
