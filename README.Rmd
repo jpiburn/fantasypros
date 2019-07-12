@@ -113,7 +113,7 @@ fp_draft_rankings("RB") %>%
 ```{r season-stats, message=FALSE}
 library(fantasypros)
 
-fp_stats("RB", season = 2018, start_week = 3, end_week = 8)
+fp_stats("QB", season = 2018, start_week = 3, end_week = 8)
 
 ```
 

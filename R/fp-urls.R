@@ -1,4 +1,5 @@
 fp_build_query_list <- function(season     = NULL,
+                                range      = NULL,
                                 start_week = NULL,
                                 end_week   = NULL,
                                 scoring    = NULL,
@@ -11,6 +12,7 @@ fp_build_query_list <- function(season     = NULL,
 
   query_list <- list(
     year    = season,
+    range   = range,
     start   = start_week,
     end     = end_week,
     scoring = scoring,

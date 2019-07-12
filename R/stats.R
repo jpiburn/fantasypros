@@ -42,10 +42,19 @@ fp_stats <- function(pos = "QB", season, start_week = 1, end_week = 17,
 
   fp_query_list <- fp_build_query_list(
     season     = season,
+    range      = "custom",
     start_week = start_week,
     end_week   = end_week,
     scoring    = scoring
   )
+
+  # The stats url is start_week and end_week.
+  # This is different then the others that are just start and end.
+  start_index <- which(names(fp_query_list) == "start")
+  names(fp_query_list)[start_index] <- "start_week"
+
+  end_index <- which(names(fp_query_list) == "end")
+  names(fp_query_list)[end_index] <- "end_week"
 
   pos_path <- fp_format_pos_path(pos)
 

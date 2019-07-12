@@ -110,25 +110,25 @@ fp_draft_rankings("RB") %>%
 ``` r
 library(fantasypros)
 
-fp_stats("RB", season = 2018, start_week = 3, end_week = 8)
-#> # A tibble: 332 x 23
-#>    player pos   team  season start_week end_week scoring rushing_att
+fp_stats("QB", season = 2018, start_week = 3, end_week = 8)
+#> # A tibble: 151 x 23
+#>    player pos   team  season start_week end_week scoring passing_cmp
 #>    <chr>  <chr> <chr>  <dbl>      <dbl>    <dbl> <chr>         <dbl>
-#>  1 Aaron~ RB    ATL     2018          3        8 half              0
-#>  2 Adria~ RB    WAS     2018          3        8 half            251
-#>  3 Ahman~ RB    GB      2018          3        8 half              0
-#>  4 Alber~ RB    JAC     2018          3        8 half              0
-#>  5 Alvin~ RB    TEN     2018          3        8 half              0
-#>  6 Antho~ RB    WAS     2018          3        8 half              0
-#>  7 Anton~ RB    LAR     2018          3        8 half              0
-#>  8 B.J. ~ RB    TB      2018          3        8 half              0
-#>  9 Brad ~ RB    CAR     2018          3        8 half              0
-#> 10 Carey~ RB    WAS     2018          3        8 half              0
-#> # ... with 322 more rows, and 15 more variables: rushing_yds <dbl>,
-#> #   rushing_y_a <dbl>, rushing_lg <dbl>, rushing_20 <dbl>,
-#> #   rushing_td <dbl>, receiving_rec <dbl>, receiving_tgt <dbl>,
-#> #   receiving_yds <dbl>, receiving_y_r <dbl>, receiving_td <dbl>,
-#> #   fl <dbl>, g <dbl>, fpts <dbl>, fpts_g <dbl>, own <dbl>
+#>  1 Aaron~ QB    GB      2018          3        8 half            124
+#>  2 Alex ~ QB    WAS     2018          3        8 half             90
+#>  3 Ben R~ QB    PIT     2018          3        8 half            132
+#>  4 Brett~ QB    TEN     2018          3        8 half              0
+#>  5 Brian~ QB    BUF     2018          3        8 half              0
+#>  6 Brian~ QB    NE      2018          3        8 half              0
+#>  7 Brock~ QB    DET     2018          3        8 half              0
+#>  8 Byron~ QB    PIT     2018          3        8 half              0
+#>  9 Chad ~ QB    KC      2018          3        8 half              0
+#> 10 Chad ~ QB    MIA     2018          3        8 half              0
+#> # ... with 141 more rows, and 15 more variables: passing_att <dbl>,
+#> #   passing_pct <dbl>, passing_yds <dbl>, passing_y_a <dbl>,
+#> #   passing_td <dbl>, passing_int <dbl>, passing_sacks <dbl>,
+#> #   rushing_att <dbl>, rushing_yds <dbl>, rushing_td <dbl>, fl <dbl>,
+#> #   g <dbl>, fpts <dbl>, fpts_g <dbl>, own <dbl>
 ```
 
 ## Weekly Snap Counts
