@@ -109,6 +109,15 @@ fp_draft_rankings("RB") %>%
 ```
 
 
+## Season Stats
+```{r season-stats, message=FALSE}
+library(fantasypros)
+
+fp_stats("RB", season = 2018, start_week = 3, end_week = 8)
+
+```
+
+
 ## Weekly Snap Counts
 ```{r snap-counts, message=FALSE}
 library(fantasypros)

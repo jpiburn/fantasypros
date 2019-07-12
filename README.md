@@ -105,6 +105,32 @@ fp_draft_rankings("RB") %>%
 
 <img src="man/figures/README-rb-erc-chart-1.png" width="100%" />
 
+## Season Stats
+
+``` r
+library(fantasypros)
+
+fp_stats("RB", season = 2018, start_week = 3, end_week = 8)
+#> # A tibble: 332 x 23
+#>    player pos   team  season start_week end_week scoring rushing_att
+#>    <chr>  <chr> <chr>  <dbl>      <dbl>    <dbl> <chr>         <dbl>
+#>  1 Aaron~ RB    ATL     2018          3        8 half              0
+#>  2 Adria~ RB    WAS     2018          3        8 half            251
+#>  3 Ahman~ RB    GB      2018          3        8 half              0
+#>  4 Alber~ RB    JAC     2018          3        8 half              0
+#>  5 Alvin~ RB    TEN     2018          3        8 half              0
+#>  6 Antho~ RB    WAS     2018          3        8 half              0
+#>  7 Anton~ RB    LAR     2018          3        8 half              0
+#>  8 B.J. ~ RB    TB      2018          3        8 half              0
+#>  9 Brad ~ RB    CAR     2018          3        8 half              0
+#> 10 Carey~ RB    WAS     2018          3        8 half              0
+#> # ... with 322 more rows, and 15 more variables: rushing_yds <dbl>,
+#> #   rushing_y_a <dbl>, rushing_lg <dbl>, rushing_20 <dbl>,
+#> #   rushing_td <dbl>, receiving_rec <dbl>, receiving_tgt <dbl>,
+#> #   receiving_yds <dbl>, receiving_y_r <dbl>, receiving_td <dbl>,
+#> #   fl <dbl>, g <dbl>, fpts <dbl>, fpts_g <dbl>, own <dbl>
+```
+
 ## Weekly Snap Counts
 
 ``` r
