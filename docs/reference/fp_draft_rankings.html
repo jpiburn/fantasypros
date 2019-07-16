@@ -148,52 +148,52 @@ Available options include</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># overall ECR for half point ppr</span>
-<span class='fu'>fp_draft_rankings</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 543 x 14</span><span>
+<span class='fu'>fp_draft_rankings</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 489 x 14</span><span>
 #&gt;    scoring  rank  tier player team  pos   pos_rank   bye  best worst   avg
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> half        1     1 Saquo~ NYG   RB           1    11     1     4   1.7
-#&gt; </span><span style='color: #555555;'> 2</span><span> half        2     1 Ezeki~ DAL   RB           2     8     1     6   2.1
-#&gt; </span><span style='color: #555555;'> 3</span><span> half        3     1 Chris~ CAR   RB           3     7     1     8   2.9
-#&gt; </span><span style='color: #555555;'> 4</span><span> half        4     1 Alvin~ NO    RB           4     9     1     9   3.5
-#&gt; </span><span style='color: #555555;'> 5</span><span> half        5     1 DeAnd~ HOU   WR           1    10     5    16   7.4
-#&gt; </span><span style='color: #555555;'> 6</span><span> half        6     1 Melvi~ LAC   RB           5    12     4    21   7.6
-#&gt; </span><span style='color: #555555;'> 7</span><span> half        7     1 David~ ARI   RB           6    12     3    37   8.1
-#&gt; </span><span style='color: #555555;'> 8</span><span> half        8     1 Davan~ GB    WR           2    11     4    15   8.1
-#&gt; </span><span style='color: #555555;'> 9</span><span> half        9     2 Julio~ ATL   WR           3     9     5    27  11.1
-#&gt; </span><span style='color: #555555;'>10</span><span> half       10     2 Le'Ve~ NYJ   RB           7     4     4    42  11.7
-#&gt; </span><span style='color: #555555;'># ... with 533 more rows, and 3 more variables: std_dev </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, adp </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+#&gt; </span><span style='color: #555555;'> 1</span><span> half        1     1 Saquo~ NYG   RB           1    11     1     4   1.8
+#&gt; </span><span style='color: #555555;'> 2</span><span> half        2     1 Ezeki~ DAL   RB           2     8     1     6   2.2
+#&gt; </span><span style='color: #555555;'> 3</span><span> half        3     1 Chris~ CAR   RB           3     7     1     8   2.8
+#&gt; </span><span style='color: #555555;'> 4</span><span> half        4     1 Alvin~ NO    RB           4     9     1     9   3.4
+#&gt; </span><span style='color: #555555;'> 5</span><span> half        5     1 DeAnd~ HOU   WR           1    10     5    15   7.2
+#&gt; </span><span style='color: #555555;'> 6</span><span> half        6     1 David~ ARI   RB           5    12     3    37   7.7
+#&gt; </span><span style='color: #555555;'> 7</span><span> half        7     1 Davan~ GB    WR           2    11     4    15   8.2
+#&gt; </span><span style='color: #555555;'> 8</span><span> half        8     1 Melvi~ LAC   RB           6    12     4    27   9.3
+#&gt; </span><span style='color: #555555;'> 9</span><span> half        9     1 Julio~ ATL   WR           3     9     5    27  11  
+#&gt; </span><span style='color: #555555;'>10</span><span> half       10     1 Le'Ve~ NYJ   RB           7     4     5    42  11.8
+#&gt; </span><span style='color: #555555;'># ... with 479 more rows, and 3 more variables: std_dev </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, adp </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 #&gt; #   vs_adp </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='co'># TE ECR using standard scoring</span>
-<span class='fu'>fp_draft_rankings</span>(<span class='kw'>pos</span> <span class='kw'>=</span> <span class='st'>"TE"</span>, <span class='kw'>scoring</span> <span class='kw'>=</span> <span class='st'>"std"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 127 x 14</span><span>
+<span class='fu'>fp_draft_rankings</span>(<span class='kw'>pos</span> <span class='kw'>=</span> <span class='st'>"TE"</span>, <span class='kw'>scoring</span> <span class='kw'>=</span> <span class='st'>"std"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 119 x 14</span><span>
 #&gt;    scoring  rank  tier player team  pos   pos_rank   bye  best worst   avg
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> std         1     1 Travi~ KC    TE           1    12     1     5   1  
-#&gt; </span><span style='color: #555555;'> 2</span><span> std         2     1 Georg~ SF    TE           2     4     1     5   2.3
-#&gt; </span><span style='color: #555555;'> 3</span><span> std         3     1 Zach ~ PHI   TE           3    10     2     5   3.5
-#&gt; </span><span style='color: #555555;'> 4</span><span> std         4     1 O.J. ~ TB    TE           4     7     2    14   3.9
-#&gt; </span><span style='color: #555555;'> 5</span><span> std         5     2 Hunte~ LAC   TE           5    12     2     9   5.4
-#&gt; </span><span style='color: #555555;'> 6</span><span> std         6     2 Evan ~ NYG   TE           6    11     3    12   6.2
-#&gt; </span><span style='color: #555555;'> 7</span><span> std         7     2 Jared~ NO    TE           7     9     3    16   7.9
-#&gt; </span><span style='color: #555555;'> 8</span><span> std         8     2 Eric ~ IND   TE           8     6     4    15   8.1
-#&gt; </span><span style='color: #555555;'> 9</span><span> std         9     2 David~ CLE   TE           9     7     5    17   8.9
-#&gt; </span><span style='color: #555555;'>10</span><span> std        10     3 Vance~ PIT   TE          10     7     4    25  10.9
-#&gt; </span><span style='color: #555555;'># ... with 117 more rows, and 3 more variables: std_dev </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, adp </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+#&gt; </span><span style='color: #555555;'> 2</span><span> std         2     1 Georg~ SF    TE           2     4     1     5   2.4
+#&gt; </span><span style='color: #555555;'> 3</span><span> std         3     1 Zach ~ PHI   TE           3    10     2     8   3.5
+#&gt; </span><span style='color: #555555;'> 4</span><span> std         4     1 O.J. ~ TB    TE           4     7     2     8   3.9
+#&gt; </span><span style='color: #555555;'> 5</span><span> std         5     2 Hunte~ LAC   TE           5    12     2    11   5.4
+#&gt; </span><span style='color: #555555;'> 6</span><span> std         6     2 Evan ~ NYG   TE           6    11     3    10   6.1
+#&gt; </span><span style='color: #555555;'> 7</span><span> std         7     2 Jared~ NO    TE           7     9     3    17   8.1
+#&gt; </span><span style='color: #555555;'> 8</span><span> std         8     2 Eric ~ IND   TE           8     6     4    15   8.5
+#&gt; </span><span style='color: #555555;'> 9</span><span> std         9     2 David~ CLE   TE           9     7     5    19   9  
+#&gt; </span><span style='color: #555555;'>10</span><span> std        10     3 Vance~ PIT   TE          10     7     4    25  10.6
+#&gt; </span><span style='color: #555555;'># ... with 109 more rows, and 3 more variables: std_dev </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, adp </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 #&gt; #   vs_adp </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='co'># Individual Defensive Player ECR</span>
-<span class='fu'>fp_draft_rankings</span>(<span class='kw'>pos</span> <span class='kw'>=</span> <span class='st'>"IDP"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 81 x 12</span><span>
+<span class='fu'>fp_draft_rankings</span>(<span class='kw'>pos</span> <span class='kw'>=</span> <span class='st'>"IDP"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 78 x 12</span><span>
 #&gt;    scoring  rank  tier player team  pos   pos_rank   bye  best worst   avg
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> half        1     1 Bobby~ SEA   LB           1    11     1     8   3.6
-#&gt; </span><span style='color: #555555;'> 2</span><span> half        2     1 J.J. ~ HOU   DE           1    10     1     6   4.2
-#&gt; </span><span style='color: #555555;'> 3</span><span> half        3     1 Luke ~ CAR   LB           2     7     3    10   5.6
-#&gt; </span><span style='color: #555555;'> 4</span><span> half        4     1 Deion~ ATL   LB           3     9     5     8   6  
-#&gt; </span><span style='color: #555555;'> 5</span><span> half        5     2 Joey ~ LAC   DE           2    12     2    14   7  
-#&gt; </span><span style='color: #555555;'> 6</span><span> half        6     2 Aaron~ LAR   DT           1     9     1    13   7.4
-#&gt; </span><span style='color: #555555;'> 7</span><span> half        7     2 Danie~ MIN   DE           3    12     8    13  10  
-#&gt; </span><span style='color: #555555;'> 8</span><span> half        8     2 C.J. ~ NYJ   LB           4     4     7    22  11.6
-#&gt; </span><span style='color: #555555;'> 9</span><span> half        9     3 Blake~ GB    LB           5    11     6    25  14.4
-#&gt; </span><span style='color: #555555;'>10</span><span> half       10     3 Roqua~ CHI   LB           6     6     2    20  14.6
-#&gt; </span><span style='color: #555555;'># ... with 71 more rows, and 1 more variable: std_dev </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'> 1</span><span> half        1     1 Bobby~ SEA   LB           1    11     1     8   3.5
+#&gt; </span><span style='color: #555555;'> 2</span><span> half        2     1 J.J. ~ HOU   DE           1    10     1     6   3.8
+#&gt; </span><span style='color: #555555;'> 3</span><span> half        3     1 Luke ~ CAR   LB           2     7     3     7   4.5
+#&gt; </span><span style='color: #555555;'> 4</span><span> half        4     1 Deion~ ATL   LB           3     9     5     8   6.3
+#&gt; </span><span style='color: #555555;'> 5</span><span> half        5     2 Aaron~ LAR   DT           1     9     1    13   6.5
+#&gt; </span><span style='color: #555555;'> 6</span><span> half        6     2 Joey ~ LAC   DE           2    12     2    16   7.5
+#&gt; </span><span style='color: #555555;'> 7</span><span> half        7     2 C.J. ~ NYJ   LB           4     4     7    11   9  
+#&gt; </span><span style='color: #555555;'> 8</span><span> half        8     2 Danie~ MIN   DE           3    12     9    14  11.5
+#&gt; </span><span style='color: #555555;'> 9</span><span> half        9     2 Myles~ CLE   DE           4     7    10    16  12  
+#&gt; </span><span style='color: #555555;'>10</span><span> half       10     3 Blake~ GB    LB           5    11     6    25  14  
+#&gt; </span><span style='color: #555555;'># ... with 68 more rows, and 1 more variable: std_dev </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

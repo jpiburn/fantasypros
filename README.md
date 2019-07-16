@@ -105,6 +105,52 @@ fp_draft_rankings("RB") %>%
 
 <img src="man/figures/README-rb-erc-chart-1.png" width="100%" />
 
+## Team Target Distributions
+
+``` r
+library(fantasypros)
+library(tidyverse)
+library(ggplot2)
+
+fp_team_targets(season = 2018) %>%
+  select(
+    team, 
+    ends_with("percent")
+  ) %>%
+  mutate(
+    team = forcats::fct_reorder(team, rb_percent)
+  ) %>%
+  gather("position", "percent", -team) %>%
+  mutate(
+    pos = factor(
+      position, 
+      levels = c("te_percent", "wr_percent", "rb_percent"), 
+      labels = c("TE", "WR", "RB")
+      )
+  ) %>%
+  ggplot() +
+  geom_col(
+    aes(team, percent, fill = pos), alpha = 0.9
+  ) +
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  ggsci::scale_fill_jama() +
+  hrbrthemes::theme_ipsum_rc() + 
+  coord_flip() +
+  labs(
+    title   = "Team Target Distribution",
+    fill  = NULL,
+    y       = "Target %",
+    x       = NULL,
+    caption = "Data: fantasypros.com"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+<img src="man/figures/README-target-dist-1.png" width="100%" />
+
 ## Season Stats
 
 ``` r
